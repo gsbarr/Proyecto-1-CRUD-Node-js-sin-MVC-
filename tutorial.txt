@@ -1,0 +1,34 @@
+// El proyecto se inicia ejecutando:
+
+npm init --yes
+
+// Luego instalamos los módulos que vamos a utilizar
+// modulos básicos
+npm i express // EXPRESS es el servidor web
+
+npm i morgan  // MORGAN nos brinda mensajes de logs más descriptivos
+
+npm i nodemon  // NODEMON reinicia automáticamente el servidor cuando le hacemos cambios
+
+// Creamos la siguiente linea a los scripts del archivo package.json
+
+  "scripts": {
+    "dev": "nodemon src/index.js"
+  },
+
+
+npm i mongoose  // Para conectar a la base de datos MONGODB
+
+npm i dotenv // Para utilizar variables de entorno. Nos va a servir para ocultar la contraseña de la BD
+
+/// Otros módulos
+npm i connect-flash  // CONNECT-FLASH brinda herramientas para intercambiar información en cookies
+
+npm i bcryptjs  // BCRYPTJS tiene herramientas de encriptado de información
+
+npm i express-session // Para impplementar el guardado de sesión de un usuario
+
+npm i passport // Tiene herramientas para autenticar usuario
+
+
+

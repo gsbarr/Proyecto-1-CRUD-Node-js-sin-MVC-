@@ -1,5 +1,11 @@
 const express = require('express');
+
+// En la variable APP se guarda el servidor
 const app = express();
+
+// Inicializamos base de datos
+require('./db.js');
+
 // Sirve para ver en consola información útil sobre cómo es llamado el servidor
 const morgan = require('morgan');
 
