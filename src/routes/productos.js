@@ -2,7 +2,8 @@ const { Router } = require("express");
 const enrutador = Router();
 
 // Traemos los datos del json
-const ProdData = require('../models/TablaProductos.json');
+//const ProdData = require('../models/TablaProductos.json');
+const Posts = require('../models/Posts.js');
 
 // Rutas de CONTROLADORES
 enrutador.get('/prueba',(req, res) => {
@@ -19,26 +20,36 @@ enrutador.get('/prueba',(req, res) => {
 });
 
 // Ruta para obtener la lista de todos los productos
-enrutador.get('/', (req, res) => {
-    res.json(ProdData);
+enrutador.get('/', async (req, res) => {
+    const post = await Posts.find().lean();
+    res.json(post);
+    
 });
 
 // Ruta para buscar un producto en particular
-enrutador.get('/:id', (req, res) => {
+enrutador.get('/:id', async (req, res) => {
     const { id } = req.params;
     console.log(req.params);
 
+    if (id) {
+        const post = await Posts.findById(id).lean();
+        res.json(post);
+    } else
+    {
+        res.status(404).json({error: 'No se encontró el producto'});
+    }
     // Recorremos todos los productos
     // Dentro del FOREACH, prod = ProdData[i]
-    ProdData.forEach( (prod) => {
+    /*ProdData.forEach( (prod) => {
         // Si un producto coincide con el id que nos mandaron
         if(prod.id == id){
             console.log(prod);
             // Devolvemos el producto
             res.json(prod);
         }
-    });
-    res.status(404).json({error: 'No se encontró el producto'});
+    });*/
+
+    
 });
 
 // Ruta para crear un nuevo producto
@@ -88,11 +99,23 @@ enrutador.put('/actualizar/:id', (req, res) => {
 
 // Ruta para eliminar un recurso
 // ":id" es el id del recurso que queremos eliminar. Es una variable
-enrutador.delete('/eliminar/:id', (req, res) => {
+enrutador.delete('/eliminar/:id', async (req, res) => {
     // Traemos los parámetros de la petición
-    const { id } = req.params;
-    console.log(req.params);
+    const id = req.params.id;
+    console.log(req.params.id);
 
+    if (id) {
+        await Posts.findByIdAndDelete(id);
+            
+            //.catch(res.status(500).json({error: 'Problema al eliminar el recurso'}));
+        //res.json({status: 'Recurso eliminado'});
+        res.send('OK?');
+    } else
+    {
+        res.status(404).json({error: 'No se encontró el recurso'});
+    }
+    
+    /*
     if ( item && precio && cantidad) {
         ProdData.forEach( (prod, i) => {
             if(prod.id == id){
@@ -104,7 +127,7 @@ enrutador.delete('/eliminar/:id', (req, res) => {
             }
         });
     }
-
+*/
 });
 
 // Exporta este módulo
