@@ -26,7 +26,7 @@ app.get('/', (req, res) => {
 // Traemos la ruta del módulo productos
 // El primer parámetro crea un prefijo /api/productos para todas
 // las rutas dentro de productos.js 
-app.use('/api/productos', require('./routes/productos.js'));
+app.use('/api/posts', require('./routes/RutasPosts.js'));
 
 
 
