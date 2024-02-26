@@ -24,6 +24,7 @@ enrutador.get('/', async (req, res) => {
 
     try {
         const post = await Posts.find().lean();
+        console.log(JSON.stringify(post));
         res.status(200).json(post);
     } catch(e){
         res.status(500).json({error: e});
@@ -43,6 +44,7 @@ enrutador.get('/:id', async (req, res) => {
             const post = await Posts.findById(id).lean();
 
             if (post){
+                console.log(JSON.stringify(post));
                 res.status(200).json(post);
             } else {
                 res.status(404).json({error: 'Recurso no encontrado'});
@@ -62,8 +64,11 @@ enrutador.get('/:id', async (req, res) => {
 enrutador.post('/nuevo', async (req, res) => {
 
     // Traemos los parámetros de la petición
+    //console.log('body:'+req.body);
     const {autor, titulo, texto} = req.body;
-    console.log(req.params);
+    console.log("autor:" + autor);
+    console.log("titulo:" + titulo);
+    console.log("texto:" + texto);
 
     // verificamos si tenemos todos los datos
     if (autor && titulo && texto) {
