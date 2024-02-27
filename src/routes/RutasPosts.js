@@ -26,7 +26,6 @@ enrutador.get('/', async (req, res) => {
         const post = await Posts.find().lean();
         console.log(JSON.stringify(post));
         res.status(200).json(post);
-        //res.send("caca");
     } catch(e){
         res.status(500).json({error: e});
     }
