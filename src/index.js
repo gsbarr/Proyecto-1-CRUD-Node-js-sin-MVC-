@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 
 // En la variable APP se guarda el servidor
 const app = express();
@@ -16,6 +17,8 @@ app.set('port', process.env.PORT || 3000);
 app.use(morgan('dev'));
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());
+// Habilitamos CORS para todos los orígenes
+app.use(cors());    
 
 // Rutas / controladores //
 //Creamos una ruta de prueba

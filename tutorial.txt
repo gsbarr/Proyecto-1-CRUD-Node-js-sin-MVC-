@@ -5,6 +5,7 @@ npm init --yes
 // Luego instalamos los módulos que vamos a utilizar
 // modulos básicos
 npm i express // EXPRESS es el servidor web
+npm i cors    // CORS es una política de peticiones HTTP que queremos habilitar
 
 npm i morgan  // MORGAN nos brinda mensajes de logs más descriptivos
 
